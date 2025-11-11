@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HBD🌻</title>
+<style>
+  body {
+    margin: 0;
+    font-family: "Comic Sans MS", cursive;
+    background-color: #fff3b0;
+    overflow-x: hidden;
+    color: #5a3e00;
+  }
+
+  h1 {
+    font-size: 3em;
+    color: #e1a100;
+    text-shadow: 2px 2px #fff5c3;
+  }
+
+  h2 {
+    color: #e1a100;
+  }
+
+  p {
+    font-size: 1.3em;
+    margin: 15px auto;
+    max-width: 600px;
+    line-height: 1.6em;
+  }
+
+  .btn {
+    display: inline-block;
+    background-color: #ffd54f;
+    color: #5a3e00;
+    padding: 12px 30px;
+    margin: 10px;
+    border-radius: 30px;
+    font-size: 1.1em;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 8px rgba(255, 204, 0, 0.3);
+  }
+
+  .btn:hover {
+    background-color: #ffecb3;
+    transform: scale(1.1);
+  }
+
+  .msg-box {
+    margin-top: 30px;
+    font-size: 1.2em;
+    background: #fff9c4;
+    display: inline-block;
+    padding: 20px 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
+  }
+
+  /* Sidebar */
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 220px;
+    height: 100%;
+    background: #ffecb3;
+    padding-top: 40px;
+    box-shadow: 3px 0 10px rgba(0,0,0,0.1);
+  }
+
+  .sidebar a {
+    display: block;
+    margin: 10px 20px;
+    padding: 12px;
+    border-radius: 25px;
+    background: #fff9c4;
+    text-decoration: none;
+    color: #5a3e00;
+    font-size: 1.1em;
+    transition: 0.3s;
+  }
+
+  .sidebar a:hover, .sidebar a.active {
+    background: #ffe082;
+    transform: scale(1.05);
+  }
+
+  /* Main content */
+  .content {
+    margin-left: 240px;
+    padding: 30px;
+    text-align: center;
+  }
+
+  section {
+    display: none;
+    background: #fff9c4;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(255, 204, 0, 0.3);
+    margin: 25px auto;
+    max-width: 650px;
+  }
+
+  section.active {
+    display: block;
+    animation: fadeIn 0.6s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Balloons */
+  .balloons span {
+    position: fixed;
+    bottom: -100px;
+    width: 40px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #f48fb1;
+    animation: rise 7s linear infinite;
+    opacity: 0.9;
+  }
+
+  .balloons span::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -40px;
+    width: 2px;
+    height: 45px;
+    background: linear-gradient(to bottom, #d4af37, #ffeb3b);
+    transform: translateX(-50%);
+    border-radius: 2px;
+  }
+
+  .balloons span:nth-child(1) { left: 10%; background-color: #f48fb1; animation-delay: 0s; }
+  .balloons span:nth-child(2) { left: 25%; background-color: #ffcc80; animation-delay: 2s; }
+  .balloons span:nth-child(3) { left: 45%; background-color: #81d4fa; animation-delay: 4s; }
+  .balloons span:nth-child(4) { left: 65%; background-color: #a5d6a7; animation-delay: 1s; }
+  .balloons span:nth-child(5) { left: 80%; background-color: #ce93d8; animation-delay: 3s; }
+
+  @keyframes rise {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+  }
+  .photo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.photo {
+  background: #fffde7;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(255, 204, 0, 0.3);
+  padding: 10px;
+  width: 150px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.photo:hover {
+  transform: scale(1.08);
+}
+
+.photo img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.photo span {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.1em;
+  color: #5a3e00;
+}
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .sidebar {
+      position: relative;
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      box-shadow: none;
+    }
+    .sidebar a {
+      flex: 1 1 40%;
+      text-align: center;
+    }
+    .content {
+      margin-left: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="balloons">
+  <span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <a href="#" class="active" onclick="showSection('home', this)">🏠 Home</a>
+  <a href="#" onclick="showSection('about', this)">💛 About Tai</a>
+  <a href="#" onclick="showSection('journey', this)">🌸 25 Beautiful Years</a>
+  <a href="#" onclick="showSection('memories', this)">💫 Memories</a>
+  <a href="#" onclick="showSection('message', this)">💌 Message</a>
+  <a href="#" onclick="showSection('thanks', this)">💐 Thank You Note</a>
+</div>
+
+<!-- Main content -->
+<div class="content">
+
+  <!-- Home Page -->
+  <section id="home" class="active">
+    <h1>🌻 Happy Birthday Rani-Pani Tai 🌻</h1>
+    <h2 style="color:#e1a100; font-weight:bold;">🎉 Celebrating Beautiful 25 Years 🎉</h2>
+
+    <p>Dear Tai, you are the sunshine that fills every heart with warmth💛  
+    <br>May your 25th year be as bright, gentle, and golden as your soul🌞 
+    <br>Keep smiling, keep shining you truly make life more beautiful!🌸</p>
+
+    <div>
+      <button class="btn" onclick="showWish()">Make a Wish💌</button>
+      <button class="btn" onclick="playSong()">Let's sing a song🎵</button>
+      <button class="btn" onclick="stopSong()">Stop the song⏹️</button>
+    </div>
+
+    <div id="wishBox" class="msg-box" style="display:none;"></div>
+    <audio id="birthdaySong" src="birthday.mp3"></audio>
+  </section>
+
+  <section id="about">
+  <h2>🌻 About My Sister — Rani-Pani Tai 🌻</h2>
+
+  <img src="main.jpg" alt="Rani-Pani Tai" style="width: 250px; height: 320px; border-radius: 20px; object-fit: cover; box-shadow: 0 4px 10px rgba(255, 204, 0, 0.4); margin-bottom: 20px;">
+
+  <p>
+    If kindness had a face, it would be hers. She has always been my secret keeper, my biggest supporter, and my forever best friend. 
+    She’s strong yet soft, ambitious yet full of heart. Her compassion touches everyone around her she goes out of her way to help others, 
+    spreading warmth like sunshine on a cloudy day.  
+  </p>
+
+  <p>
+    She’s the sweetest soul you’ll ever meet a true diva with dreams as bright as her smile. Her empathy, strength, and grace inspire me every single day. 💛  
+  </p>
+</section>
+
+
+  <section id="journey">
+    <h2>🌸 25 Beautiful Years</h2>
+    <p>From your little giggles to your big dreams, every year has added a new shade to your story. You’ve grown with grace, love, and that signature Scorpio sparkle. 💫</p>
+  </section>
+
+  <section id="memories">
+  <h2>💫 Memories</h2>
+  <p>From Playing Ghar-Ghar to endless gossip, every picture tells a piece of our story 💛</p>
+
+  <div class="photo-grid">
+    <div class="photo">
+      <img src="mem1.jpg" alt="Memory 1">
+      <span>Hugs 💛</span>
+    </div>
+    <div class="photo">
+      <img src="mem2.jpg" alt="Memory 2">
+      <span>Giggles ✨</span>
+    </div>
+    <div class="photo">
+      <img src="mem3.jpg" alt="Memory 3">
+      <span>Beaches 🌻</span>
+    </div>
+    <div class="photo">
+      <img src="mem4.jpg" alt="Memory 4">
+      <span>Selfies 🌸</span>
+    </div>
+    <div class="photo">
+      <img src="mem5.jpg" alt="Memory 5">
+      <span>Forever 💕</span>
+    </div>
+    <div class="photo">
+      <img src="mem6.jpg" alt="Memory 2">
+      <span>Goofballs ✨</span>
+    </div>
+    <div class="photo">
+      <img src="mem7.jpg" alt="Memory 3">
+      <span>Smiles 🌻</span>
+    </div>
+    <div class="photo">
+      <img src="mem8.jpg" alt="Memory 4">
+      <span>Bond 🌸</span>
+    </div>
+  </div>
+</section>
+
+
+  <section id="message">
+    <h2>💌 Message</h2>
+    <p>Dear Rani-Pani Tai💖,<br><br>
+    You’ve been more than just a sister you’re a best friend, a secret keeper n the voice of calm when life gets loud💛<br>
+    May your 25th year bring calm skies, warm hearts, and infinite joy. You’re truly one in a million radiant, strong, and full of that magical Scorpio energy we both know so well🌻<br>
+    May your days ahead be filled with gentle mornings, laughter that never fades, and moments that remind you how deeply you are loved💫<br><br>
+    Love you loads, Tai 🌸<br>
+    Can’t wait for all the late-night talks, endless gossip, and more memories that we’ll cherish forever💕<br>
+    </p>
+  </section>
+
+  <section id="thanks">
+    <h2>💐 Thank You Note</h2>
+    <p>Thank you for being you no filters, no masks.<br>Just my Rani-Pani Tai, shining in her 25th year like never before.<br> Love you always, my soulsister 💖</p>
+  </section>
+</div>
+
+<script>
+function showWish() {
+  const msgs = [
+    "May your day bloom like a sunflower in sunshine!🌼 ",
+    "You deserve all the happiness and love today, always and forever!🌟 ",
+    "Keep shining, TaiPai you’re golden inside and out!💛 ",
+    "Wishing you endless smiles and sunflower fields forever!🌸 ",
+    "Forever my gossip buddy, my Scorpio twin happy 25th!💖 ",
+    "You are stronger, wiser, and more capable than you’ll ever realize!💫"
+  ];
+  const msg = msgs[Math.floor(Math.random() * msgs.length)];
+  const box = document.getElementById("wishBox");
+  box.style.display = "inline-block";
+  box.innerHTML = msg;
+}
+
+function playSong() {
+  const song = document.getElementById("birthdaySong");
+  song.play();
+  alert("Let's gooo — 1...2...3...🎂");
+}
+
+function stopSong() {
+  const song = document.getElementById("birthdaySong");
+  song.pause();
+  song.currentTime = 0;
+}
+
+function showSection(id, link) {
+  document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".sidebar a").forEach(a => a.classList.remove("active"));
+  link.classList.add("active");
+}
+</script>
+
+</body>
+</html>
